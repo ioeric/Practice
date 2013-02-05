@@ -1,5 +1,5 @@
 /*
-Quine¿McCluskey algorithm written in CPP by Eric Liu
+Quine-McCluskey algorithm written in CPP by Eric Liu
 (http://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm)
 ===================================================================================
 Example:
@@ -202,11 +202,12 @@ int main()
 	memset(count,0,sizeof(int)*20*20);
 	//ifstream data("data.in");
 	
-	cout << "Please input number of variable: ";
+	cout << "<Please input number of variable: > ";
 	cin >> leng;
-	cout << "Please input the number of products: " << endl;
+	cout << "<Please input the number of products: > ";
 	cin >> num;
-	cout << "Please input combinations: " << endl; 
+	if (num > 0)
+		cout << "<Please input combinations: >" << endl; 
 	int value_bin = 1;
 	int temp_in;
 	for (int i=0;i<num;i++)
@@ -220,10 +221,11 @@ int main()
 		count_one[i] = num_of_one(m0[i][1]);
 	}
 
-	cout << "Please input the number of don't care combination: ";
+	cout << "<Please input the number of don't care combination: > ";
 	int num2;
 	cin >> num2;
-	cout << "Please input don't care combinations: " << endl;
+	if (num2 > 0)
+		cout << "Please input don't care combinations: " << endl;
 	for (int i=0;i<num2;i++)
 	{
 		cin >> m0[num+i][0];
