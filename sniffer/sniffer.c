@@ -1,3 +1,36 @@
+/*
+Sniffer.c V1.0.0
+
+by Eric Liu
+
+Based on libpcap 
+Environment: Linux
+To use this sniffer, please make sure you have libpcap installed in your system!!!
+If you do not have libpcap:
+	sudo yum install pcap
+	or
+	apt-get install pcap
+
+Usage:
+	gcc sniffer.c -o sniffer -lpcap
+	sudo ./sniffer interface_name bridge_name (filter_file_name)
+=======================================================
+	cat filter
+	--------------------------
+	tcp and not src 123.125.114.144
+	--------------------------
+	
+	Example:
+		sudo ./sniffer wlan0 br0 filter
+=======================================================
+
+	Comment: 
+	
+	Sniffe all packets through interface and write them into net bridge br0.
+	Syntax in filter is the same as tcpdump.
+	You can use tcpdump or wireshark to check whether packets have been written to bridge or not.
+
+*/
 #include<pcap.h>
 #include<linux/if.h>
 #include<linux/if_tun.h>
