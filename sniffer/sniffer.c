@@ -47,7 +47,7 @@ Usage:
 pcap_t *if_handle, *br_handle;
 static char errbuf[PCAP_ERRBUF_SIZE];
 
-#define Log  stderr
+#define Log  stdout
 
 void usage(){
 	printf("Usage: ./sniffer [interface] [bridge] [filter_expression_file_name](optional)\n");
