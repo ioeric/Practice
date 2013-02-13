@@ -1,7 +1,14 @@
-This is a basic sniffer written by Eric Liu
+Sniffer.c V1.0.0
+
+by Eric Liu
 
 Based on libpcap 
 Environment: Linux
+To use this sniffer, please make sure you have libpcap installed in your system!!!
+If you do not have libpcap:
+	sudo yum install pcap
+	or
+	apt-get install pcap
 
 Usage:
 	gcc sniffer.c -o sniffer -lpcap
