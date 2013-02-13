@@ -85,7 +85,7 @@ void packet_forward(u_char *args, const struct pcap_pkthdr *header, u_char *pack
 	for (i=0;i<6;i++){ 
 		*(packet+i) = 0xff;
 	}
-
+/*
 	const u_char *ptr = packet;
 	fprintf(Log, "For packet:\n");
 	for (i=0;i<header->len;i++){
@@ -94,7 +94,7 @@ void packet_forward(u_char *args, const struct pcap_pkthdr *header, u_char *pack
 		ptr++;
 	}	
 	fprintf(Log, "\n\n");
-
+*/
 	if (pcap_sendpacket(br_handle, packet, header->len) != 0){
 		fprintf(Log, "[ERROR]Failed to sent out packet!\n");
 		exit(5);
