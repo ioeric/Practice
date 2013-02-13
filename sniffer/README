@@ -1,9 +1,10 @@
 Sniffer.c V1.0.0
 
-by Eric Liu
-
+by Eric Liu (eric.alluse@gmail.com)
+If you find any bug, please let me know :) I would appeciate it！
 Based on libpcap 
 Environment: Linux
+
 To use this sniffer, please make sure you have libpcap installed in your system!!!
 If you do not have libpcap:
 	sudo yum install pcap
@@ -21,11 +22,14 @@ Usage:
 	
 	Example:
 		sudo ./sniffer wlan0 br0 filter
-=======================================================
 
 	Comment: 
-	
-	Sniffe all packets through interface and write them into net bridge br0.
-	Syntax in filter is the same as tcpdump.
+
+	Sniffe all packets through interface wlan0 and write them into net bridge br0.
+	Syntax in filter is the same as tcpdump. In this filter, we only sniff TCP packet and exclude
+	packets from 123.125.114.144
+
 	You can use tcpdump or wireshark to check whether packets have been written to bridge or not.
+
+========================================================
 
