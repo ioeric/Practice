@@ -32,7 +32,6 @@ Usage:
 
 */
 #include<pcap.h>
-#include<linux/if.h>
 #include<linux/if_tun.h>
 #include<string.h>
 #include<fcntl.h>
@@ -40,6 +39,7 @@ Usage:
 #include<sys/ioctl.h>
 #include<stdlib.h> 
 #include<arpa/inet.h>
+#include<linux/if.h>
 
 #define MAX_FILTER_LENGTH 100
 
