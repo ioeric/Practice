@@ -24,6 +24,7 @@ void *quicksort(void* args){
 	int st = data->st;
 	int ed = data->ed;
 	int *a = data->arr;
+	delete data;
 //	cerr << "[Thread " << (unsigned int)pthread_self() << " ] st: " << st << " ed: " << ed << endl;
 	if (st>=ed){ 
 	//	cerr << "st>=ed" << endl;
@@ -71,8 +72,8 @@ void *quicksort(void* args){
 		cerr << "Failed when join" << endl;
 	}
 	
-	delete args1;	
-	delete args2;
+	//delete args1;	
+	//delete args2;
 	pthread_exit(NULL);
 
 }
@@ -114,7 +115,7 @@ int main(){
 	int rc_j = pthread_join(first, &status);
 	
 	cout << "Total thread number: " << thread_num << endl;
-	delete main_args;
+	//delete main_args;
 	if (rc_j){
 		cerr << "Failed when joining main thread" << endl;
 	        exit(EXIT_FAILURE);	
