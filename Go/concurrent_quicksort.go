@@ -1,12 +1,3 @@
-/*
-Work:
-Worker: - Block waiting for work
-	- Feedback when finishing
-Balancer:
-	- Manage a pool of workers
-	- Assign work to free workers
-*/
-
 package main
 
 import (
@@ -16,7 +7,7 @@ import (
 )
 
 const numWorkers = 10
-const numRequests = 10000
+const numRequests = 50000
 const Limit = 100
 const numElements = 100000000
 const maxElement = 1000000000
@@ -70,17 +61,17 @@ func quicksort(arr []int, st, ed int) int {
 
 // Balancer dispatches request(job) to workers
 type Request struct {
-	arr []int
-	st, ed int
+	arr []int 	// Array to be sorted
+	st, ed int      // Start point and end point
 }
 
 // Worker receives requests from balancer via 'requests' channel and 
 // process the request
 type Worker struct{
 	requests chan Request 
-	idx int
+	idx int   // Worker's index in balancer's pool
 	newTask chan Request
-	num int
+	num int   // Record how many requests this worker have processed
 }
 
 // Workers keep looping to get a request and process the request after 
@@ -88,7 +79,7 @@ type Worker struct{
 func (w *Worker) work(done chan int, kill chan int){
 	for {
 		select{
-		case req := <-w.requests:
+		case req := <-w.requests: 
 			w.num ++ 
 			if req.st > req.ed {
 				done <- 0
@@ -113,7 +104,7 @@ func (w *Worker) work(done chan int, kill chan int){
 					done <- 0
 				}
 			}
-		case <-kill:	
+		case <-kill:	// Suicide!
 			return
 		}
 	}
@@ -165,6 +156,7 @@ func (b *Balancer) balance(work chan Request, kill chan int) {
 			b.dispatch(req)
 		case d := <-b.done:
 			sorted = sorted + d
+			// If all elements are sorted, finish balance
 			if sorted >= b.n {	
 				return
 			}
@@ -208,15 +200,18 @@ func FirstRequest(arr []int, c chan Request) {
 
 func main() {
 	arr := RandomArray(numElements, maxElement)
-	work := make(chan Request)	
-	done := make(chan int, numWorkers)
-	kill := make(chan int, numWorkers)
+	work := make(chan Request) // Request channel: send request to balancer	
+	done := make(chan int, numWorkers) // Passing the number of elements to balancer sorted after every sort
+	kill := make(chan int, numWorkers) // balancer sends terminal signal using kill channel
 	b := NewBalancer(work, len(arr), done, kill)
 	
 	go FirstRequest(arr, work)
+
 	t := time.Now()
 	b.balance(work,kill)
 	dur := time.Since(t)	
+	
+	// Send signals to kill all workers
 	for i := range b.p {
 		kill <- i
 	}
