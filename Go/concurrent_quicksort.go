@@ -1,3 +1,11 @@
+/*
+   Concurrent quicksort 
+   Balancer/Worker model
+   By Eric Liu
+   Let me know if you find any bugs, thanks!
+   Please do not delete this comment!
+*/
+
 package main
 
 import (
