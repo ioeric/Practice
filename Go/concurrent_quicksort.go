@@ -9,8 +9,8 @@ import (
 const numWorkers = 10
 const numRequests = 50000
 const Limit = 100
-const numElements = 100000000
-const maxElement = 1000000000
+const numElements = 10000000
+const maxElement = 100000000
 
 // If the number of elements to be sorted is smaller than 100, implement 
 //bubble sort
